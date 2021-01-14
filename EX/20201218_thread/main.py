@@ -28,12 +28,14 @@ class MainWindow(QMainWindow):
         
         # 綁定按鈕的事件處理
         self.ui.pushButton.clicked.connect(self.execute)
+        # 執行緒自定義訊號連線的槽函式
+        self.thread.trigger.connect(self.display)
 
     def execute(self):
         # 啟動執行緒
         self.thread.start()
-        # 執行緒自定義訊號連線的槽函式
-        self.thread.trigger.connect(self.display)
+        # 執行緒自定義訊號連線的槽函式, 放這邊產生問題 error!!.
+        # self.thread.trigger.connect(self.display)
 
     def display(self, _str):
         self.ui.listWidget.addItem(_str)
@@ -52,7 +54,7 @@ class WorkerThread(QThread):
 
     # run函數結束則執行緒結束, 也就是start()結束
     def run(self):
-        #self.file_str = ""
+        self.file_str = ""
         #重寫執行緒執行的run函式
         #觸發自定義訊號
         for i in range(0, 5):
