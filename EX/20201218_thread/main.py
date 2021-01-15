@@ -31,11 +31,20 @@ class MainWindow(QMainWindow):
         # 執行緒自定義訊號連線的槽函式
         self.thread.trigger.connect(self.display)
 
+        # thread物件之singal與slot的連結
+        self.thread.trigger.connect(self.display)
+
     def execute(self):
         # 啟動執行緒
         self.thread.start()
+<<<<<<< HEAD
         # 執行緒自定義訊號連線的槽函式, 放這邊產生問題 error!!.
         # self.thread.trigger.connect(self.display)
+=======
+        # 執行緒自定義訊號連線的槽函式
+        # thread.trigger寫在這邊會重複print
+        #self.thread.trigger.connect(self.display)
+>>>>>>> add button, win example and modify thread example
 
     def display(self, _str):
         self.ui.listWidget.addItem(_str)
