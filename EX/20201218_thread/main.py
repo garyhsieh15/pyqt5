@@ -27,15 +27,20 @@ class MainWindow(QMainWindow):
         self.thread = WorkerThread()
         
         # 綁定按鈕的事件處理
+        print("1111")
         self.ui.pushButton.clicked.connect(self.execute)
-
+        print("2222")
         # 執行緒自定義訊號連線的槽函式
         # thread物件之singal與slot的連結
+        print("3333")
         self.thread.trigger.connect(self.display)
+        print("4444")
 
     def execute(self):
+        print("5555")
         # 啟動執行緒
         self.thread.start()
+        print("6666")
         # 執行緒自定義訊號連線的槽函式, thread.trigger寫在這邊會重複print
         #self.thread.trigger.connect(self.display)
 
@@ -52,9 +57,12 @@ class WorkerThread(QThread):
         super(WorkerThread, self).__init__()
    
     def __del__(self):
+        print("1010")
         self.wait()
+        print("11_11")
 
     # run函數結束則執行緒結束, 也就是start()結束
+    print("7777")
     def run(self):
         self.file_str = ""
         #重寫執行緒執行的run函式
@@ -65,6 +73,8 @@ class WorkerThread(QThread):
             # time.sleep(0.5)
             # 通過自定義訊號把待顯示的字串傳遞給槽函式
             self.trigger.emit(self.file_str)
+            print("8888")
+        print("9999")
 
 
 

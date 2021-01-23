@@ -19,8 +19,8 @@
      <rect>
       <x>40</x>
       <y>50</y>
-      <width>151</width>
-      <height>441</height>
+      <width>531</width>
+      <height>181</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout"/>
@@ -70,6 +70,7 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionaddWin"/>
+   <addaction name="actionsection"/>
   </widget>
   <action name="actionaddWin">
    <property name="text">
@@ -97,6 +98,14 @@
   <action name="actionClose">
    <property name="text">
     <string>Close</string>
+   </property>
+  </action>
+  <action name="actionsection">
+   <property name="text">
+    <string>section</string>
+   </property>
+   <property name="toolTip">
+    <string>section_</string>
    </property>
   </action>
  </widget>
