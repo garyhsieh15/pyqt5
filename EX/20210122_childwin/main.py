@@ -19,6 +19,8 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         
+        self.setToolTip("hint")
+
         #self.ui_children = UiChildren()
         #self.ui_children.setupUi(self)
         # self.child = children()生成子窗口实例self.child
