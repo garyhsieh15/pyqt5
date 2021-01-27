@@ -19,6 +19,7 @@ class Radiodemo(QWidget):
 		self.btn1 = QRadioButton("Button1")
 		self.btn1.setChecked(True)
 		self.btn1.toggled.connect(lambda:self.btnstate(self.btn1))
+		#self.btn1.toggled.connect(self.btnstate(self.btn1))
 		layout.addWidget(self.btn1)
         
 		self.btn2 = QRadioButton("Button2")
