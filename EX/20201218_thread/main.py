@@ -69,7 +69,7 @@ class WorkerThread(QThread):
         #觸發自定義訊號
         for i in range(0, 5):
             self.file_str = "File index {0}".format(i)
-            # time.sleep(1)
+            time.sleep(1)
             # time.sleep(0.5)
             # 通過自定義訊號把待顯示的字串傳遞給槽函式
             self.trigger.emit(self.file_str)

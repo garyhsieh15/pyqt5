@@ -37,7 +37,8 @@ class lineEditDemo(QWidget):
 		pDoubleValidator = QDoubleValidator(self)
 		pDoubleValidator.setRange(-360, 360)
 		pDoubleValidator.setNotation(QDoubleValidator.StandardNotation)
-		pDoubleValidator.setDecimals(2)
+		#pDoubleValidator.setDecimals(2)
+		pDoubleValidator.setDecimals(3)
 		
 		# 字符和数字
 		reg = QRegExp("[a-zA-Z0-9]+$")
