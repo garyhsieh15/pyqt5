@@ -1,4 +1,6 @@
-
+import numpy as np
+import math
+import matplotlib.pyplot as plt
 import sys
 import time
 import read_data as rd
@@ -13,6 +15,12 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QThread, \
         pyqtSignal
 from UI.label import Ui_Form
+
+# define pi value
+pi = 3.1415926
+
+# damping ratio, ksee
+#KSEE = 0.05
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -32,6 +40,18 @@ class MainWindow(QMainWindow):
 
         self.thread.trigger.connect(self.draw_PSA)
 
+        # 設定comboBox
+        self.ui.comboBox.addItem("newmark linear acc")
+        self.ui.comboBox.addItem("newmark const avg acc")
+
+        # 設定lineEdit
+        self.ui.lineEdit.setText("0.05")
+
+        # 設定progressBar
+        self.ui.progressBar.setMinimum(0)
+        self.ui.progressBar.setMaximum(100)
+        self.ui.progressBar.setValue(0)
+
     def dump_acc_data(self):
         time, up_acc, NS_acc, EW_acc = rd.read_acc_history()
         
@@ -44,7 +64,52 @@ class MainWindow(QMainWindow):
         self.thread.start()
 
     def draw_PSA(self):
-        nlacc.newmark_linear_acc()
+                
+        if self.ui.comboBox.currentText() == "newmark linear acc":
+            print("newmark linear acc method")
+            
+            damping_ratio = float(self.ui.lineEdit.text())
+
+            # set natural period
+            Tn = []
+            Wn = []
+            num = 0
+            for i in np.arange(0.0, 5, 0.1):
+                Tn.append(i)
+                if i == 0:
+                    Wn.append(10 ** 4)
+                else:
+                    Wn.append(2 * pi / Tn[num])
+                num = num + 1
+
+            umax = []
+            PSV = []
+            PSA = []
+            for i in range(0, len(Tn)):
+                #print("show i value: ", i)
+                dis_max, pv, pa = nlacc.calc_max_respense(Wn[i], damping_ratio)
+                umax.append(dis_max)
+                PSV.append(pv)
+                PSA.append(pa)
+                
+                self.ui.progressBar.setValue((i / (len(Tn) - 1)) * 100)
+                # reflash windown
+                QApplication.processEvents()
+            # PSA - Tn
+            plt.figure(figsize = (20, 6))
+            plt.plot(Tn, PSA, label = "PSA - Tn, damping ratio = " + str(damping_ratio))
+            plt.grid(True)
+            plt.legend()
+            plt.xlabel("Tn")
+            plt.ylabel("PSA")
+
+            plt.show()
+            
+        elif self.ui.comboBox.currentText() == "newmark const avg acc":
+            print("newmark const avg acc method")
+            print("self.ui.lineEdit.text(): ", self.ui.lineEdit.text())
+        else:
+            print("select error method !!")
 
 class WorkerThread(QThread):
     # 自定義訊號物件。引數str就代表這個訊號可以傳一個字串
