@@ -12,6 +12,7 @@ class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(793, 471)
+        Form.setWindowOpacity(1.0)
         self.textEdit = QtWidgets.QTextEdit(Form)
         self.textEdit.setGeometry(QtCore.QRect(20, 50, 751, 341))
         self.textEdit.setObjectName("textEdit")
