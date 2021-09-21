@@ -1,0 +1,6 @@
+
+$ date    folder    file    class    function    description
+20210124  resource_pic  main.py  --  --  按鍵後加入圖片  
+20210127  text_edit  main.py  -- -- 按鍵後畫出spectrum
+20210921  message_box  main.py  --  --  按鍵後跳出message box
+
