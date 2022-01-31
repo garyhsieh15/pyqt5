@@ -6,7 +6,10 @@ import time
 
 from PyQt5.QtWidgets import QApplication, \
         QMainWindow, \
-        QWidget
+        QWidget, \
+        QFontDialog
+
+#from PyQt5.QtWidgets import *
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -15,8 +18,13 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        self.ui.pushButton.clicked.connect(self.close)
+        self.ui.pushButton.clicked.connect(self.get_font)
 
+    def get_font(self):
+        font, ok = QFontDialog.getFont()
+        if ok:
+            # 填入字體大小的設定值
+            self.ui.label.setFont(font)
 
 if __name__ == '__main__':
     # 新增一個Qt應用程式，管理所有的Qt物件資源(唯一一個), 並且傳入sys.argv作為初始化資料
