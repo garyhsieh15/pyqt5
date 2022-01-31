@@ -27,29 +27,34 @@ class MainWindow(QMainWindow):
         self.thread = WorkerThread()
         
         # 綁定按鈕的事件處理
-        print("1111")
         self.ui.pushButton.clicked.connect(self.execute)
-        print("2222")
         # 執行緒自定義訊號連線的槽函式
         # thread物件之singal與slot的連結
-        print("3333")
         self.thread.trigger.connect(self.display)
-        print("4444")
+
+        # connect signal00, signal01 to slot function
+        self.thread.signal00.connect(self.signal_call_00)
+        self.thread.signal01.connect(self.signal_call_01)
 
     def execute(self):
-        print("5555")
-        # 啟動執行緒
+        # 啟動執行緒,執行strar()函式則run()函式才會開始跑．
         self.thread.start()
-        print("6666")
-        # 執行緒自定義訊號連線的槽函式, thread.trigger寫在這邊會重複print
-        #self.thread.trigger.connect(self.display)
 
     def display(self, _str):
         self.ui.listWidget.addItem(_str)
 
+    def signal_call_00(self):
+        print("enter signal call 00 func")
+
+    def signal_call_01(self, val):
+        print("enter signal call 01 func, val:", val)
+
 class WorkerThread(QThread):
     # 自定義訊號物件。引數str就代表這個訊號可以傳一個字串
     trigger = pyqtSignal(str)
+
+    signal00 = pyqtSignal()
+    signal01 = pyqtSignal(int)
 
     #def __int__(self, parent = None):
     def __int__(self):
@@ -57,26 +62,22 @@ class WorkerThread(QThread):
         super(WorkerThread, self).__init__()
    
     def __del__(self):
-        print("1010")
         self.wait()
-        print("11_11")
 
     # run函數結束則執行緒結束, 也就是start()結束
-    print("7777")
     def run(self):
         self.file_str = ""
         #重寫執行緒執行的run函式
-        #觸發自定義訊號
         for i in range(0, 5):
             self.file_str = "File index {0}".format(i)
+            # wait 1 second.
             time.sleep(1)
-            # time.sleep(0.5)
-            # 通過自定義訊號把待顯示的字串傳遞給槽函式
+            # 觸發自定義訊號, 通過自定義訊號把待顯示的字串傳遞給槽函式
             self.trigger.emit(self.file_str)
-            print("8888")
-        print("9999")
 
-
+            # 發射訊號執行對應的槽函數
+            self.signal00.emit()
+            self.signal01.emit(100)
 
 
 if __name__ == '__main__':
