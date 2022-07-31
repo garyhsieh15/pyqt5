@@ -15,9 +15,9 @@ from PyQt5.QtCore import Qt
 class Drawing(QWidget):
 	def __init__(self,parent=None):
 		super(Drawing,self).__init__(parent)
-		self.setWindowTitle("在窗体中绘画出文字例子") 
+		self.setWindowTitle("中绘画出文字例子in win") 
 		self.resize(300, 200)        
-		self.text = '欢迎学习 PyQt5'
+		self.text = 'welcome 学习 PyQt5'
          
 	def paintEvent(self,event):
 		painter = QPainter(self)        

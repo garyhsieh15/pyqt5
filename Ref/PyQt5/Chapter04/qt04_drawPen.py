@@ -18,7 +18,9 @@ class Drawing(QWidget):
 		self.initUI()
 
 	def initUI(self):   
-		self.setGeometry(300, 300, 280, 270)
+		#self.setGeometry(300, 300, 280, 270)
+        #                  x,   y, delta x, delta y  
+		self.setGeometry(000, 000, 80, 270)
 		self.setWindowTitle('钢笔样式例子')        
 
 	def paintEvent(self, e): 

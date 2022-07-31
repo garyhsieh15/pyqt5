@@ -16,7 +16,7 @@ class Drawing(QWidget):
 	def __init__(self, parent=None):
 		super(Drawing, self).__init__(parent)
 		self.resize(300, 200)  
-		self.setWindowTitle("在窗体中画点")         
+		self.setWindowTitle("画点in win")         
 
 	def paintEvent(self, event):
 		qp = QPainter()

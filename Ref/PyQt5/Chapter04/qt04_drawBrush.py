@@ -31,7 +31,9 @@ class Drawing(QWidget):
 	def drawLines(self, qp): 
 		brush = QBrush(Qt.SolidPattern)
 		qp.setBrush(brush)
-		qp.drawRect(10, 15, 90, 60)
+		#qp.drawRect(10, 15, 90, 60)
+        #           x,   y,  delta x, delta y
+		qp.drawRect(0, 0, 40, 30)
 
 		brush = QBrush(Qt.Dense1Pattern)
 		qp.setBrush(brush)
