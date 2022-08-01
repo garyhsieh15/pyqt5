@@ -11,10 +11,12 @@ from PyQt5.QtWidgets import QApplication, \
         QWidget, \
         QFileDialog, \
         QVBoxLayout, \
-        QLabel
+        QLabel, \
+        QCalendarWidget
 
 from PyQt5.QtCore import QDir, \
-        Qt
+        Qt, \
+        QDate
 from PyQt5.QtGui import QPixmap, \
         QPainter, \
         QBrush
@@ -22,6 +24,28 @@ from PyQt5.QtGui import QPixmap, \
 #from PyQt5.QtCore import *
 #from PyQt5.QtGui import *
 #from PyQt5.QtWidgets import *
+
+class CalendarExample( QWidget):
+	def __init__(self):
+		super(CalendarExample, self).__init__()
+		self.initUI()
+		
+	def initUI(self): 
+		self.cal =  QCalendarWidget(self)
+		self.cal.setMinimumDate(QDate(1980, 1, 1))
+		self.cal.setMaximumDate(QDate(3000, 1, 1))
+		self.cal.setGridVisible(True)
+		self.cal.move(20, 20)
+		self.cal.clicked[QDate].connect(self.showDate)
+		self.lbl =  QLabel(self)
+		date = self.cal.selectedDate()
+		self.lbl.setText(date.toString("yyyy-MM-dd dddd"))
+		self.lbl.move(0, 220)
+		self.setGeometry(100,100,400,350)
+		self.setWindowTitle('win Calendar')
+		
+	def showDate(self, date): 
+		self.lbl.setText(date.toString("yyyy-MM-dd dddd") )
 
 
 class Drawing(QWidget):
@@ -109,10 +133,12 @@ if __name__ == '__main__':
     # 新增一個MainWindow物件(QMainWindow物件)
     window = MainWindow()
     demo = Drawing()
+    win_calendar = CalendarExample()
 
     # 顯示視窗
     window.show()
     demo.show()
+    win_calendar.show()
     # app.exec_() 進入QApplication程式，也就是說開始運行Qt GUI程式,
     # 當app.exec_()執行完畢時，關閉python。
     sys.exit(app.exec_()) 
