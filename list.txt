@@ -5,5 +5,5 @@ $ date    folder    file    class    function    description
 20210921  message_box  main.py  --  --  按鍵後跳出message box
 20220131  font_dialog  main.py  --  --  設定字體的大小
 20220131  file_dialog  main.py  --  --  載入圖片與文字檔案
-20220731  draw_section  main.py  --  --  繪出斜線的圖案
+20220731  draw_section  main.py  --  --  繪出斜線的圖案，顯示圖python圖示．
 

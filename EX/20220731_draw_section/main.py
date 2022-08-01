@@ -10,7 +10,8 @@ from PyQt5.QtWidgets import QApplication, \
         QMainWindow, \
         QWidget, \
         QFileDialog, \
-        QVBoxLayout
+        QVBoxLayout, \
+        QLabel
 
 from PyQt5.QtCore import QDir, \
         Qt
@@ -29,8 +30,15 @@ class Drawing(QWidget):
         self.initUI() 
 
     def initUI(self):
-        self.setGeometry(300, 300, 365, 280)
-        self.setWindowTitle('win brush')
+        self.setGeometry(300, 300, 865, 280)
+
+        lab1 = QLabel()
+        lab1.setPixmap(QPixmap("../images/python.jpg"))
+        vbox=QVBoxLayout()
+        vbox.addWidget(lab1)
+
+        self.setLayout(vbox)
+        self.setWindowTitle('win pic')
         self.show()
 
 class MainWindow(QMainWindow):
@@ -101,6 +109,7 @@ if __name__ == '__main__':
     # 新增一個MainWindow物件(QMainWindow物件)
     window = MainWindow()
     demo = Drawing()
+
     # 顯示視窗
     window.show()
     demo.show()
