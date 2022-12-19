@@ -37,7 +37,7 @@ class MainWindow(QMainWindow):
         self.thread.signal01.connect(self.signal_call_01)
 
     def execute(self):
-        # 啟動執行緒,執行strar()函式則run()函式才會開始跑．
+        # 啟動執行緒,執行start()函式則run()函式才會開始跑．
         self.thread.start()
 
     def display(self, _str):
@@ -66,6 +66,7 @@ class WorkerThread(QThread):
 
     # run函數結束則執行緒結束, 也就是start()結束
     def run(self):
+        print(">>> run starting")
         self.file_str = ""
         #重寫執行緒執行的run函式
         for i in range(0, 5):
